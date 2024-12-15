@@ -54,10 +54,20 @@ async function run() {
 
 
 
+    app.get("/review", async (req, res) => {
+      
+      const result = await reviewscollection.find().limit(6).toArray();
+      console.log(result);
+      res.send(result);
+     
+    })
+
+
     app.get("/reviews", async (req, res) => {
       
       const result = await reviewscollection.find().toArray();
       res.send(result);
+     
     })
 
 
