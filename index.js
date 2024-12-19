@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
+const ObjectId = require("mongodb").ObjectId;
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -63,6 +64,27 @@ async function run() {
       res.send(result);
      
     })
+
+
+    app.get("/my-review", async (req, res) => {
+      
+      const {email} = req.query;
+      console.log(email)
+      const result = await reviewscollection.find({email}).toArray();
+      res.send(result);
+     
+    })
+
+
+    app.delete("/my-review1/:id", async (req, res) => {
+      
+      const id = req.params.id;
+
+      const result = await reviewscollection.deleteOne({ _id: new ObjectId(id) });
+      res.send(result);
+    
+    
+    });
 
 
     app.get("/reviews", async (req, res) => {
