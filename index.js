@@ -87,6 +87,38 @@ async function run() {
     });
 
 
+
+    app.put("/update-reviews/:id", async (req, res) => {
+      
+      const id = req.params.id;
+      console.log(id);
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const reviewm = req.body;
+      
+    
+      const updatedReview = {
+        $set: {
+          name: reviewm.name,
+          title: reviewm.title,
+          email: reviewm.email,
+          thumbnail: reviewm.thumbnail,
+          rating: reviewm.rating,
+          publishing_year: reviewm.publishing_year,
+          description: reviewm.description,
+          genre: reviewm.genre
+
+        },
+      }
+
+      const result = await reviewscollection.updateOne(filter, updatedReview, options);
+      res.send(result);
+
+    
+    
+    });
+
+
     app.get("/reviews", async (req, res) => {
       
       const result = await reviewscollection.find().toArray();
