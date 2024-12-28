@@ -38,6 +38,7 @@ async function run() {
 
     const bibekcollection = client.db("Bibek").collection("database");
     const reviewscollection = client.db("Bibek").collection("reviews");
+    const watclistcollection = client.db("Bibek").collection("watchlist");
     // Send a ping to confirm a successful connection
     app.get("/coffee", async (req, res) => {
       
@@ -53,6 +54,22 @@ async function run() {
       const result = await reviewscollection.insertOne(data);
       res.send(result);
 
+    })
+
+
+    app.post ("/watchlist", async (req, res) => {
+      const data = req.body;
+      console.log(data);
+      const result = await watclistcollection.insertOne(data);
+      res.send(result);
+
+    })
+
+
+    app.get("/watchlist", async (req, res) => {
+      const {email} = req.query;
+      const result = await watclistcollection.find({email}).toArray();
+      res.send(result);
     })
 
 
