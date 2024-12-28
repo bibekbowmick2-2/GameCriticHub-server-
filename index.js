@@ -7,6 +7,8 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+const uuid = require('uuid');
+
 
 // app.get("/", (req, res) => {
 //   res.send("Hello World!");
@@ -39,12 +41,17 @@ async function run() {
     const bibekcollection = client.db("Bibek").collection("database");
     const reviewscollection = client.db("Bibek").collection("reviews");
     const watclistcollection = client.db("Bibek").collection("watchlist");
+    
+    
+
     // Send a ping to confirm a successful connection
     app.get("/coffee", async (req, res) => {
       
       const result = await bibekcollection.find().toArray();
       res.send(result);
     })
+
+
 
 
 
@@ -58,9 +65,13 @@ async function run() {
 
 
     app.post ("/watchlist", async (req, res) => {
+      const _id = uuid.v4();
       const data = req.body;
       console.log(data);
-      const result = await watclistcollection.insertOne(data);
+      const result = await watclistcollection.insertOne({
+        ...data,
+        _id: _id
+      });
       res.send(result);
 
     })
