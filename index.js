@@ -1,6 +1,7 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
+
 const ObjectId = require("mongodb").ObjectId;
 const app = express();
 const port = process.env.PORT || 5000;
@@ -36,20 +37,16 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
 
-    const bibekcollection = client.db("Bibek").collection("database");
+
     const reviewscollection = client.db("Bibek").collection("reviews");
     const watclistcollection = client.db("Bibek").collection("watchlist");
     
     
 
     // Send a ping to confirm a successful connection
-    app.get("/coffee", async (req, res) => {
-      
-      const result = await bibekcollection.find().toArray();
-      res.send(result);
-    })
+    
 
 
 
@@ -85,7 +82,7 @@ async function run() {
 
 
 
-    app.get("/review", async (req, res) => {
+    app.get("/", async (req, res) => {
       
       const result = await reviewscollection.find().limit(6).toArray();
       console.log(result);
@@ -156,7 +153,7 @@ async function run() {
 
 
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
-    await client.db("admin").command({ ping: 1 });
+    // await client.db("admin").command({ ping: 1 });
 
 
 
