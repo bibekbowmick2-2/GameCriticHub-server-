@@ -6,6 +6,30 @@
 # Live Site Link: https://unruly-destruction.surge.sh/
 
 
+### NPM Packages Used:
+
+  - "@tanstack/react-table"
+   - "antd"
+   - "axios"
+   - "firebase"
+  -  "flowbite-react"
+   - "lottie-react"
+    - "moment"
+   - "motion"
+   - "react"
+   - "react-data-table-component"
+   - "react-dom"
+   - "react-helmet-async"
+   - "react-loading-skeleton"
+   - "react-photo-view"
+   - "react-router-dom"
+   - "react-simple-typewriter"
+   - "react-toastify"
+   - "react-tooltip"
+    - "surge"
+    - "sweetalert2"
+
+
 
 
 
